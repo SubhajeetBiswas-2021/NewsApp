@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.subhajeet.newsapp.network.RetrofitClint
 import com.subhajeet.newsapp.ui.theme.NewsAppTheme
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 
@@ -27,13 +28,23 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
                     GlobalScope.launch {
-                        val checkApi = RetrofitClint.retrofit.getTopHeadlines().body()
+                   //     val checkApi = RetrofitClint.retrofit.getTopHeadlines().body()
 
-                        Log.d("mydata",checkApi.toString())
+                    //    Log.d("mydata",checkApi.toString())
+
+                    val data = fetchData()
+
+                    Log.d("data",data)
                     }
                 }
             }
         }
+    }
+
+    suspend fun fetchData():String{
+        delay(1000)
+
+        return "Hello From Server"
     }
 }
 
