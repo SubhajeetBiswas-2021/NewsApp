@@ -3,6 +3,9 @@ package com.subhajeet.newsapp.screen
 
 
 
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -25,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -39,12 +43,16 @@ fun HomeScreen(viewModels : NewsViewModels,navController:NavController){
     val res = viewModels.res.value?.articles ?: emptyList()
 
 
-    Column {
+    val context = LocalContext.current
+
+
+    /*Column {
 
         LazyColumn {
             items(res){
 
                 EachCard(title = it.title , imageUrl= it.urlToImage, onClick = {
+
                     navController.navigate(Routes.DetailsScreenRoutes(
                         title=it.title,
                         url=it.url,
@@ -56,7 +64,44 @@ fun HomeScreen(viewModels : NewsViewModels,navController:NavController){
             }
 
         }
+    }*/
+    Column {
+        LazyColumn {
+            items(res) { item ->
+                EachCard(
+                    title = item.title,
+                    imageUrl = item.urlToImage,
+                    onClick = {
+                        // Check if any required parameter is null
+                        if (item.title != null &&
+                            item.url != null &&
+                            item.description != null &&
+                            item.urlToImage != null &&
+                            item.content != null) {
+
+                            // Proceed with navigation
+                            navController.navigate(
+                                Routes.DetailsScreenRoutes(
+                                    title = item.title,
+                                    url = item.url,
+                                    description = item.description,
+                                    imageUrl = item.urlToImage,
+                                    content = item.content
+                                )
+                            )
+                        } else {
+                            // Optionally show a message or log the issue
+                            Log.e("Navigation", "Navigation aborted due to null parameters")
+
+                            Toast.makeText(context, "There is nothing more to read", Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                )
+            }
+        }
     }
+
 }
 
 @Composable
