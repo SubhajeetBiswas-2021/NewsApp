@@ -1,5 +1,6 @@
 package com.subhajeet.newsapp.screen
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,18 +8,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import coil3.compose.SubcomposeAsyncImage
-import com.subhajeet.newsapp.R
 
 
 @Composable
@@ -63,8 +63,15 @@ fun DetailsScreen(
 
         Spacer(modifier = Modifier.fillMaxWidth().padding(0.dp,34.dp,0.dp,0.dp))
 
+        val context  = LocalContext.current
         ElevatedButton(
-            onClick = {}
+            onClick = {
+                val urlIntent = Intent(Intent.ACTION_VIEW).apply {
+
+                    data = url.toUri()
+                }
+                context.startActivity(urlIntent)
+            }
         ) {
             Text(text = "Read More")
         }
