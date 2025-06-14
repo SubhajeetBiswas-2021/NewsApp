@@ -4,6 +4,7 @@ package com.subhajeet.newsapp.screen
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,12 +27,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil3.compose.AsyncImage
+import com.subhajeet.newsapp.screen.nav.Routes
 import com.subhajeet.newsapp.viewModels.NewsViewModels
 
 
 @Composable
-fun HomeScreen(viewModels : NewsViewModels){
+fun HomeScreen(viewModels : NewsViewModels,navController:NavController){
 
     val res = viewModels.res.value?.articles ?: emptyList()
 
@@ -41,7 +44,15 @@ fun HomeScreen(viewModels : NewsViewModels){
         LazyColumn {
             items(res){
 
-                eachCard(title = it.title , imageUrl= it.urlToImage)
+                EachCard(title = it.title , imageUrl= it.urlToImage, onClick = {
+                    navController.navigate(Routes.DetailsScreenRoutes(
+                        title=it.title,
+                        url=it.url,
+                        description =it.description,
+                        imageUrl = it.urlToImage,
+                        content = it.content
+                    ))
+                })
             }
 
         }
@@ -49,12 +60,14 @@ fun HomeScreen(viewModels : NewsViewModels){
 }
 
 @Composable
-fun eachCard(
+fun EachCard(
+
+    onClick:() -> Unit,
     title:String?,
     imageUrl:String?,
 ){
 
-    Card(modifier = Modifier.fillMaxWidth().padding(8.dp))
+    Card(modifier = Modifier.fillMaxWidth().padding(8.dp).clickable(onClick = onClick))
     {
         Row(
             verticalAlignment = Alignment.CenterVertically,

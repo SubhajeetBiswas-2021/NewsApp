@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.subhajeet.newsapp.screen.HomeScreen
+import com.subhajeet.newsapp.screen.nav.NavApp
 import com.subhajeet.newsapp.ui.theme.NewsAppTheme
 import com.subhajeet.newsapp.viewModels.NewsViewModels
 
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
             NewsAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                    HomeScreen(viewModels = viewModels)
+                    NavApp(viewModels = viewModels)
 
               /*      GlobalScope.launch {
                    //     val checkApi = RetrofitClint.retrofit.getTopHeadlines().body()
