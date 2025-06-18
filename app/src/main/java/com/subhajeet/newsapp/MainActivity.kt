@@ -8,12 +8,13 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.subhajeet.newsapp.screen.HomeScreen
 import com.subhajeet.newsapp.screen.nav.NavApp
 import com.subhajeet.newsapp.ui.theme.NewsAppTheme
 import com.subhajeet.newsapp.viewModels.NewsViewModels
 
-class MainActivity : ComponentActivity() {
+class
+
+MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
