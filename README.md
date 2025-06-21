@@ -1,5 +1,5 @@
-# **Top business headlines in the US **
-# **Key Features:  **
+# **Top business headlines in the US**
+# **Key Features:**
 
 🏠𝐇𝐨𝐦𝐞 𝐒𝐜𝐫𝐞𝐞𝐧: Displays a curated list of all the latest news headlines.
 
