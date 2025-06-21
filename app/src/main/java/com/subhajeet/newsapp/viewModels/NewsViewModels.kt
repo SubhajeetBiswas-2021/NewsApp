@@ -9,9 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NewsViewModels():ViewModel() {
-    val res = mutableStateOf<NewsModel?>(null)
+    val res = mutableStateOf<NewsModel?>(null)  //Making a state of the data we will be getting,mutable state means a state whose value we can change
 
-    val repo = Repo()
+    val repo = Repo()  //Making instance/object of Repo()
+
+    //value that will come from repo will be passed to res
 
     init {
         fetchData()
